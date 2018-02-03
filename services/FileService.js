@@ -1,14 +1,15 @@
 const FileService = {
-  getMoment(self, Master, req, res, next) {
-    console.log(req.body);
-    res.status(200).send();
+  getMoment(Master, self, req, res, next) {
+    console.log('request me');
+    Master.designateTask({ message: 'TEST_MESSAGE', payload: 123456 });
+    res.status(200).send('you got me \n \n');
   },
   
-  sendMoment(self, Master, req, res, next) {
+  sendMoment(Master, self, req, res, next) {
     
   },
   
-  updateMoment(self, Master, req, res, next) {
+  updateMoment(Master, self, req, res, next) {
     
   },
   

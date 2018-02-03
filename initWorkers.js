@@ -1,6 +1,7 @@
 const cluster = require('cluster'),
   http = require('http'),
-  { cpus } = require('os');
+  { cpus } = require('os'),
+  { WorkerService } = require('./services/index');
 
 module.exports = (resolve, reject) => {
   const workers = [];
@@ -19,18 +20,14 @@ module.exports = (resolve, reject) => {
       console.log(`Forking process number ${i}...`);
       const worker = cluster.fork();
       workers.push(worker);
+
+      WorkerService.initListeners(WorkerService, worker);
     }
 
     resolve({ workers, processId: process.pid });
   }
   
   function workerProcess(resolve, reject) {
-    console.log(`Worker ${process.pid} started`);
-  
-    process.on('message', function(message) {
-      console.log(`Worker ${process.pid} recevies message '${JSON.stringify(message)}'`);
-    });
-
     resolve({ workers: null, processId: process.pid });
   }
 }

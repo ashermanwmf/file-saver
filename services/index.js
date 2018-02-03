@@ -1,7 +1,9 @@
 const FileService = require('./FileService'),
-  TestService = require('./TestService');
+  TestService = require('./TestService'),
+  WorkerService = require('./WorkerService');
 
 module.exports = {
   FileService,
-  TestService
+  TestService,
+  WorkerService
 };

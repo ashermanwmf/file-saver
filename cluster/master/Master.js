@@ -7,7 +7,6 @@ class Master {
     this._id = processId;
     this._loadBalancer = [];
     this._workers = this._initWorkers(options);
-    this._initListeners();
   }
 
   get selectWorker() {
@@ -30,20 +29,20 @@ class Master {
     }, {});
   }
 
-  _initListeners() {
-    process.on('createTask', this._designateTask);
-  }
+  designateTask(options) {
+    const { message, payload } = options;
 
-  _designateTask(taskData) {
-    const workerKey = this.selectWorker,
-      worker = this.workers[workerKey];
-
-    worker.send(task.message, taskData);
-    
-    this.balanceWorker = workerKey;
-
-    // need to return true or have other message bus for response to service
-    return true;
+    switch(message) {
+      case 'TEST_MESSAGE':
+        const workerKey = this.selectWorker,
+          worker = this._workers[workerKey];
+        console.log(worker)
+        worker.send(options);      
+        this.balanceWorker = workerKey;
+        return true;
+      default:
+        return null;
+    }
   }
 }
 
