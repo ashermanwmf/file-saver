@@ -24,9 +24,16 @@ class Master {
       
       acc = acc || {};
       this.balanceWorker = key;
+      this._initWorkerListener(worker);
       acc[key] = worker;
       return acc;
     }, {});
+  }
+
+  _initWorkerListener(worker) {
+    worker.on('message', (data) => {
+      console.log('master got message: ', data);
+    })
   }
 
   designateTask(options) {

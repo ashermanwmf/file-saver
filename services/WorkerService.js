@@ -8,6 +8,7 @@ const WorkerService = {
     switch(message) {
       case 'TEST_MESSAGE':
         console.log('worker received message');
+        process.send({ message: process.pid });
         return true;
       default:
         return null;

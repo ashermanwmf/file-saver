@@ -29,4 +29,4 @@ module.exports = (resolve, reject) => {
     WorkerService.initListeners(WorkerService, process);
     resolve({ workers: null, processId: process.pid });
   }
-}
+};
