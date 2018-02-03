@@ -1,13 +1,13 @@
 const WorkerService = {
   initListeners(self, worker) {
     worker.on('message', self._performTask);
+    return worker;
   },
 
   _performTask({ message, payload }) {
-    console.log('AHHHHHHH')
     switch(message) {
       case 'TEST_MESSAGE':
-        console.log('worker recieved message');
+        console.log('worker received message');
         return true;
       default:
         return null;

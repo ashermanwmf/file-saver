@@ -36,7 +36,7 @@ class Master {
       case 'TEST_MESSAGE':
         const workerKey = this.selectWorker,
           worker = this._workers[workerKey];
-        console.log(worker)
+
         worker.send(options);      
         this.balanceWorker = workerKey;
         return true;

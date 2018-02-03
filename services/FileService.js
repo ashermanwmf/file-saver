@@ -1,6 +1,5 @@
 const FileService = {
   getMoment(Master, self, req, res, next) {
-    console.log('request me');
     Master.designateTask({ message: 'TEST_MESSAGE', payload: 123456 });
     res.status(200).send('you got me \n \n');
   },
